@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TMDb Client</string>
+    <string name="example_title">Example Title</string>
+    <string name="example_date">1999-01-10</string>
+    <string name="example_description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+        sed diem nonummy nibh euismod tincidunt ut lacreet dolore magna aliguam erat volutpat.</string>
+    <string name="example_rating">5.0</string>
 </resources>
