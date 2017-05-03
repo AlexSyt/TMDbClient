@@ -2,9 +2,12 @@ package com.example.alex.tmdbclient.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.alex.tmdbclient.R;
+import com.example.alex.tmdbclient.adapter.MoviesAdapter;
 import com.example.alex.tmdbclient.model.Movie;
 import com.example.alex.tmdbclient.model.MoviesResponse;
 import com.example.alex.tmdbclient.rest.ApiClient;
@@ -26,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.movies_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
         Call<MoviesResponse> call = apiService.getTopRatedMovies(API_KEY);
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 List<Movie> movies = response.body().getResults();
                 Log.d(TAG, "Number of movies received: " + movies.size());
+                recyclerView.setAdapter(new MoviesAdapter(movies));
             }
 
             @Override
